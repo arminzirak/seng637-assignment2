@@ -9,12 +9,10 @@ import org.junit.*;
 
 
 import java.security.InvalidParameterException;
-import java.security.Key;
 
 import static org.junit.Assert.assertEquals;
 
 public class DataUtilitiesTest {
-    private DataUtilities dataUtilities;
     private Mockery mockery, mockery_missing, mockery_one_row, mockery_one_column, mockery_key_values;
     private Values2D values2D, values2D_with_missing, values2D_one_row, values2D_one_column;
     private KeyedValues keyedValues;
