@@ -21,6 +21,13 @@ public class RangeTest {
     }
 
     @Test
+    public void centralValueShouldBeZero() {
+        assertEquals("The central value of -1 and 1 should be 0",
+                0, exampleRange.getCentralValue(), .000000001d);
+    }
+
+
+    @Test
     public void getLowerBound() {
         assertEquals(-1.0,exampleRange.getLowerBound(),0.0000001);
     }
