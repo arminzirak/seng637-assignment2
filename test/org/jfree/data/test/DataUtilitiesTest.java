@@ -108,37 +108,17 @@ public class DataUtilitiesTest {
 
     @Test // testing the array with Zero Column
     public void testCreateNumberArray2dWithZeroColumn() {
-        double[][] list = new double[10][1];
-        for(int i=0 ; i<10 ;i++)
-        {
-            list[i][0] = i  * 1.1;
-        }
+        double[][] list = new double[10][0];
         Number[][] generated_list = DataUtilities.createNumberArray2D(list);
-        assertEquals(generated_list.length, 10);
-        assertEquals(generated_list[0].length, 1);
-        for(int i=0 ; i<10 ;i++)
-        {
-            assertEquals(list[i][0], generated_list[i][0]);
-        }
+        assertEquals(0, generated_list[0].length);
+
     }
 
-    @Test // testing the array with size Zero
-    public void testCreateNumberArray2dWithSizeZero() {
-        double[][] list = new double[10][10];
-        for (int i = 0; i < 10; i ++){
-            for(int j=0 ; j<10 ;j++)
-            {
-                list[i][j] = i  * 1.1 + j;
-            }
-        }
+    @Test // testing the array with Zero Row
+    public void testCreateNumberArray2dWithZeroRow() {
+        double[][] list = new double[0][10];
         Number[][] generated_list = DataUtilities.createNumberArray2D(list);
-        assertEquals(list.length, 10);
-        assertEquals(generated_list.length, 10);
-        for (int i = 0; i < 10; i++){
-            for(int j = 0 ; j < 10; j++){
-                assertEquals(list[i][j], generated_list[i][j]);
-            }
-        }
+        assertEquals(0,generated_list.length);
     }
 
     @After
