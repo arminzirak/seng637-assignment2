@@ -92,7 +92,7 @@ public class DataUtilitiesTest {
             will(returnValue(0));
 
             one(values2D_one_row).getValue(0, 1);
-            will(returnValue(2));
+            will(returnValue(1));
 
             one(values2D_one_row).getValue(0, 2);
             will(returnValue(2));
@@ -165,6 +165,50 @@ public class DataUtilitiesTest {
     public void testCalculateRowWithNullInput() {
         DataUtilities.calculateRowTotal(null, 1);
     }
+
+
+//
+    @Test
+    public void testCalculateColumnBasic() {
+        double result = DataUtilities.calculateColumnTotal(values2D, 0);
+        assertEquals( 10, result, 0);
+    }
+
+    @Test
+    public void testCalculateColumnLastColumn() {
+        double result = DataUtilities.calculateColumnTotal(values2D, 2);
+        assertEquals( 32, result, 0);
+    }
+
+    @Test
+    public void testCalculateColumnNonBoundaryColumn() {
+        double result = DataUtilities.calculateColumnTotal(values2D, 1);
+        assertEquals( 21, result, 0);
+    }
+
+    @Test
+    public void testCalculateColumnWithMissingValue() {
+        double result = DataUtilities.calculateColumnTotal(values2D_with_missing, 1);
+        assertEquals( 20, result, 0);
+    }
+
+    @Test
+    public void testCalculateColumnOneRow() {
+        double result = DataUtilities.calculateColumnTotal(values2D_one_row, 1);
+        assertEquals( 1, result, 0);
+    }
+
+    @Test
+    public void testCalculateColumnOneColumn() {
+        double result = DataUtilities.calculateColumnTotal(values2D_one_column, 0);
+        assertEquals( 30, result, 0);
+    }
+
+    @Test(expected = InvalidParameterException.class)
+    public void testCalculateColumnWithNullInput() {
+        DataUtilities.calculateColumnTotal(null, 1);
+    }
+//
 
 
     @After
