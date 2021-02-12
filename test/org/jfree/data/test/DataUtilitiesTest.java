@@ -1,6 +1,7 @@
 package org.jfree.data.test;
 
 import org.jfree.data.DataUtilities;
+import org.jfree.data.KeyedValues;
 import org.jfree.data.Values2D;
 import org.jmock.Expectations;
 import org.jmock.Mockery;
@@ -8,13 +9,15 @@ import org.junit.*;
 
 
 import java.security.InvalidParameterException;
+import java.security.Key;
 
 import static org.junit.Assert.assertEquals;
 
 public class DataUtilitiesTest {
     private DataUtilities dataUtilities;
-    private Mockery mockery, mockery_missing, mockery_one_row, mockery_one_column;
+    private Mockery mockery, mockery_missing, mockery_one_row, mockery_one_column, mockery_key_values;
     private Values2D values2D, values2D_with_missing, values2D_one_row, values2D_one_column;
+    private KeyedValues keyedValues;
     @BeforeClass public static void setUpBeforeClass()
             throws Exception {
     }
@@ -114,6 +117,38 @@ public class DataUtilitiesTest {
             one(values2D_one_column).getValue(1, 0);
             will(returnValue(20));
         }});
+
+        mockery_key_values = new Mockery();
+        keyedValues = mockery_key_values.mock(KeyedValues.class);
+        mockery_key_values.checking(new Expectations(){{
+            atLeast(1).of(keyedValues).getItemCount();
+            will(returnValue(4));
+
+            atLeast(1).of(keyedValues).getKey(0);
+            will(returnValue(0));
+
+            atLeast(1).of(keyedValues).getKey(1);
+            will(returnValue(1));
+
+            atLeast(1).of(keyedValues).getKey(2);
+            will(returnValue(2));
+
+            atLeast(1).of(keyedValues).getKey(3);
+            will(returnValue(3));
+
+
+            atLeast(1).of(keyedValues).getValue(0);
+            will(returnValue(1.0));
+
+            atLeast(1).of(keyedValues).getValue(1);
+            will(returnValue(5.0));
+
+            atLeast(1).of(keyedValues).getValue(2);
+            will(returnValue(10.0));
+
+            atLeast(1).of(keyedValues).getValue(3);
+            will(returnValue(15.0));
+        }});
     }
 
 
@@ -209,7 +244,28 @@ public class DataUtilitiesTest {
         DataUtilities.calculateColumnTotal(null, 1);
     }
 //
+    @Test
+    public void testGetCumulativePercentagesNormal() {
+        KeyedValues result = DataUtilities.getCumulativePercentages(keyedValues);
+        assertEquals(6.0/31.0, result.getValue(1));
+    }
 
+    @Test
+    public void testGetCumulativePercentagesLastElement() {
+        KeyedValues result = DataUtilities.getCumulativePercentages(keyedValues);
+        assertEquals(1.0, result.getValue(3));
+    }
+
+    @Test
+    public void testGetCumulativePercentagesFirstElement() {
+        KeyedValues result = DataUtilities.getCumulativePercentages(keyedValues);
+        assertEquals(1.0/31.0, result.getValue(0));
+    }
+
+    @Test(expected = InvalidParameterException.class)
+    public void testGetCumulativePercentagesNull() {
+        DataUtilities.getCumulativePercentages(null);
+    }
 
     @After
     public void tearDown() throws Exception {
