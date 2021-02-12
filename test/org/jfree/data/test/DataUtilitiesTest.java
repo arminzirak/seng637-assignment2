@@ -15,12 +15,12 @@ public class DataUtilitiesTest {
 
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = IllegalArgumentException.class) //testing the null input
     public void testCreateNumberArrayNullInput(){
         DataUtilities.createNumberArray(null);
     }
 
-    @Test
+    @Test // testing the equivalence of the input and output values
     public void testCreateNumberArray() {
         double[] list = new double[10];
         for (int i = 0; i < 10; i ++){
@@ -34,8 +34,23 @@ public class DataUtilitiesTest {
         }
     }
 
+    @Test // testing the array with length of one
+    public void testCreateNumberArrayWithSizeOne() {
+        double[] list = new double[1];
+        list[0] = 5;
+        Number[] generated_list = DataUtilities.createNumberArray(list);
+        assertEquals(generated_list.length, 1);
+        assertEquals(5, generated_list[0]);
+    }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test // testing the array with length of zero
+    public void testCreateNumberArrayWithSizeZero() {
+        double[] list = new double[0];
+        Number[] generated_list = DataUtilities.createNumberArray(list);
+        assertEquals(0, generated_list.length);
+    }
+
+    @Test(expected = IllegalArgumentException.class) //testing the null input
     public void testCreateNumberArray2dNullInput(){
         DataUtilities.createNumberArray2D(null);
     }
