@@ -131,6 +131,33 @@ Returns the sum of the values in one row of the supplied data table. With invali
 | testCalculateRowTotalWithNullInput    | to test the function with null input           | null                         | 1      | InvalidParameterException | ECT         |
 
 
+
+### Method 5: getCumulativePercentages
+
+public static KeyedValues getCumulativePercentages(KeyedValues data)
+Returns a KeyedValues instance that contains the cumulative percentage values for the data in another KeyedValues instance. The cumulative percentage is each value's cumulative sum's portion of the sum of all the values.
+
+### Partitions
+
+#### data
+
+     The keyedValues object
+- expected:
+  - a list of key values
+  - a list of index values from 0 to the length of keys -1 
+- unexpected
+  - null
+
+
+
+| Test Case                                | Description            | keyedValues                 | Expected                  | Test Type   |
+|------------------------------------------|------------------------|-----------------------------|---------------------------|-------------|
+| testGetCumulativePercentagesNormal       | A key in range of keys | [(0:1),(1:5),(2:10),(3:15)] | 6.0 / 31.0                | ECT         |
+| testGetCumulativePercentagesLastElement  | last key in the keys   | [(0:1),(1:5),(2:10),(3:15)] | 1.0                       | boundary UB |
+| testGetCumulativePercentagesFirstElement | first key in the list  | [(0:1),(1:5),(2:10),(3:15)] | 1.0 / 31.0                | boundary LB |
+| testGetCumulativePercentagesNull         | null input             | [(0:1),(1:5),(2:10),(3:15)] | InvalidParameterException | ECT         |
+
+
 ## class - Range 
 
 ### Method 1: constrain
