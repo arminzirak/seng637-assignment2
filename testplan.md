@@ -93,6 +93,7 @@ Returns the sum of the values in one column of the supplied data table. With inv
 | testCalculateColumnTotalOneColumn        | to test the function with a data of one column | [[10] [20]]                  | 0      | 10                        | ECT         |
 | testCalculateColumnTotalWithNullInput    | to test the function with null input           | null                         | 1      | InvalidParameterException | ECT         |
 
+
 ### Method 4: calculateRowTotal
 
 public static double calculateRowTotal(Values2D data, int row)
@@ -101,6 +102,7 @@ Returns the sum of the values in one row of the supplied data table. With invali
 ### Partitions
 
 #### data
+
      the table of values (null not permitted)
 - expected:
   - array with width more than one and height more than one
@@ -127,3 +129,27 @@ Returns the sum of the values in one row of the supplied data table. With invali
 | testCalculateRowTotalOneRow           | to test the function with a data of one row    | [[0, 1, 2]]                  | 0      | 3                         | ECT         |
 | testCalculateRowTotalOneRow        | to test the function with a data of one column | [[10] [20]]                  | 0      | 10                        | ECT         |
 | testCalculateRowTotalWithNullInput    | to test the function with null input           | null                         | 1      | InvalidParameterException | ECT         |
+
+
+## class - Range 
+
+### Method 1: constrain
+
+public double constrain(double value)
+Returns the value within the range that is closest to the specified value.
+
+### Partitions
+
+#### data
+     A double primitives
+- expected:
+    - the whole range from upper than to lower than boundary
+
+| Test Case                        | Description                              | data | Expected | Test Type   |
+|----------------------------------|------------------------------------------|------|----------|-------------|
+| testConstrainAboveUpper          | input > upper (range = -1 : 1)           | 1.2  | 1        | ECD         |
+| testConstrainUpper               | input = upper                            | 1    | 1        | Boundary-UB |
+| testConstrainInRange             | input > lower, input < upper             | 0.5  | 0.5      | ECT         |
+| testConstrainZeroValuesConstrain | input = 0, input > lower, input < upper  | 0    | 0        | ECT         |
+| testConstrainLower               | input = lower                            | -1   | -1       | Boundary-LB |
+| testConstrainBelowLower          | input < lower                            | -5   | -1       | ECT         |
