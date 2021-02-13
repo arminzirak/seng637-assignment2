@@ -147,7 +147,7 @@ Returns the value within the range that is closest to the specified value.
 
 | Test Case                        | Description                              | data | Expected | Test Type   |
 |----------------------------------|------------------------------------------|------|----------|-------------|
-| testConstrainAboveUpper          | input > upper (range = -1 : 1)           | 1.2  | 1        | ECD         |
+| testConstrainAboveUpper          | input > upper (range = -1 : 1)           | 1.2  | 1        | ECT         |
 | testConstrainUpper               | input = upper                            | 1    | 1        | Boundary-UB |
 | testConstrainInRange             | input > lower, input < upper             | 0.5  | 0.5      | ECT         |
 | testConstrainZeroValuesConstrain | input = 0, input > lower, input < upper  | 0    | 0        | ECT         |
