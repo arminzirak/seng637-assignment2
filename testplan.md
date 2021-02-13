@@ -92,3 +92,28 @@ Returns the sum of the values in one column of the supplied data table. With inv
 | testCalculateColumnTotalOneRow           | to test the function with a data of one row    | [[0, 1, 2]]                  | 1      | 3                         | ECT         |
 | testCalculateColumnTotalOneColumn        | to test the function with a data of one column | [[10] [20]]                  | 0      | 10                        | ECT         |
 | testCalculateColumnTotalWithNullInput    | to test the function with null input           | null                         | 1      | InvalidParameterException | ECT         |
+
+## class - Range  
+
+### Method 1: contains
+
+public boolean contains(double value)
+Returns true if the specified value is within the range and false otherwise.
+
+### Partitions
+
+#### data
+     a double 
+- expected:
+    - array of size more than one
+    - array of size one
+    - array of size zero
+- unexpected 
+    - null
+    
+| Test Case                                | Description                              | data      | Expected                 | Test Type    |
+|------------------------------------------|------------------------------------------|-----------|--------------------------|--------------|
+| testCreateNumberArrayNullInput           | to test the null input as an input       | null      | IllegalArgumentException | ECT          |
+| testCreateNumberArrayWithSizeMoreThanOne | to test array with size of more than one | [1 2 ...] | number array([1 2 ...])  | ECT          |
+| testCreateNumberArrayWithSizeOne         | to test array with size one              | [5]       | number array([5])        | Boundary ALB |
+| testCreateNumberArrayWithSizeZero        | to test array with size zero             | []        | number array([])         | Boundary LB  |
