@@ -155,23 +155,30 @@ Returns the value within the range that is closest to the specified value.
 | testConstrainBelowLower          | input < lower                            | -5   | -1       | ECT         |
 
 
-### Method 1: constrain
+### Method 2: equals
 
-public double constrain(double value)
-Returns the value within the range that is closest to the specified value.
+public boolean equals(java.lang.Object obj)
+Tests this object for equality with an arbitrary object.
 
 ### Partitions
 
 #### data
-     A double primitives
+     Any object to test against (null permitted).
 - expected:
-    - the whole range from upper than to lower than boundary
+    - Equal range
+    - Equal lower
+    - Equal upper
+    - Equal lower and upper
+    - Non equal range
+    - Null
+    - Other objects 
 
-| Test Case                        | Description                              | data | Expected | Test Type   |
-|----------------------------------|------------------------------------------|------|----------|-------------|
-| testConstrainAboveUpper          | input > upper (range = -1 : 1)           | 1.2  | 1        | ECT         |
-| testConstrainUpper               | input = upper                            | 1    | 1        | Boundary-UB |
-| testConstrainInRange             | input > lower, input < upper             | 0.5  | 0.5      | ECT         |
-| testConstrainZeroValuesConstrain | input = 0, input > lower, input < upper  | 0    | 0        | ECT         |
-| testConstrainLower               | input = lower                            | -1   | -1       | Boundary-LB |
-| testConstrainBelowLower          | input < lower                            | -5   | -1       | ECT         |
+
+| Test Case                                  | Description                                              | Expected | Test Type |
+|--------------------------------------------|----------------------------------------------------------|----------|-----------|
+| testEqualsWithSameLowerDifferentUpper      | range1.upper != range2.upper, range1.lower=range2.lower  | false    | ECT       |
+| testEqualsWithSameLowerSameUpper           | range1.upper = range2.upper, range1.lower=range2.lower   | true     | ECT       |
+| testEqualsWithDifferentLowerSameUpper      | range1.upper = range2.upper, range1.lower!=range2.lower  | false    | ECT       |
+| testEqualsWithDifferentLowerDifferentUpper | range1.upper != range2.upper, range1.lower!=range2.lower | false    | ECT       |
+| testEqualsWithNullInput                    | null input                                               | false    | ECT       |
+| testEqualsWithNonRangeInput                | other object input                                       | false    | ECT       |
