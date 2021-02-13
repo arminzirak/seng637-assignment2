@@ -93,27 +93,40 @@ Returns the sum of the values in one column of the supplied data table. With inv
 | testCalculateColumnTotalOneColumn        | to test the function with a data of one column | [[10] [20]]                  | 0      | 10                        | ECT         |
 | testCalculateColumnTotalWithNullInput    | to test the function with null input           | null                         | 1      | InvalidParameterException | ECT         |
 
-## class - Range  
 
-### Method 1: contains
+### Method 4: calculateRowTotal
 
-public boolean contains(double value)
-Returns true if the specified value is within the range and false otherwise.
+public static double calculateRowTotal(Values2D data, int row)
+Returns the sum of the values in one row of the supplied data table. With invalid input, a total of zero will be returned.
 
 ### Partitions
 
 #### data
-     a double 
+
+     the table of values (null not permitted)
 - expected:
-    - array of size more than one
-    - array of size one
-    - array of size zero
-- unexpected 
-    - null
-    
-| Test Case                                | Description                              | data      | Expected                 | Test Type    |
-|------------------------------------------|------------------------------------------|-----------|--------------------------|--------------|
-| testCreateNumberArrayNullInput           | to test the null input as an input       | null      | IllegalArgumentException | ECT          |
-| testCreateNumberArrayWithSizeMoreThanOne | to test array with size of more than one | [1 2 ...] | number array([1 2 ...])  | ECT          |
-| testCreateNumberArrayWithSizeOne         | to test array with size one              | [5]       | number array([5])        | Boundary ALB |
-| testCreateNumberArrayWithSizeZero        | to test array with size zero             | []        | number array([])         | Boundary LB  |
+  - array with width more than one and height more than one
+  - array with width equals to one and height more than one
+  - array with width more than one and height equals to one
+  - array with width equals to one and height equals to one
+- unexpected
+  - null
+
+#### row
+     the column index
+- expected:
+  - int in range of [0, (the number of row - 1)]
+- unexpected
+  - less than zero
+  - more than the number of rows
+
+
+| Test Case                                | Description                                    | Data                         | Row | Expected                  | Test Type   |
+|------------------------------------------|------------------------------------------------|------------------------------|--------|---------------------------|-------------|
+| testCalculateRowTotalBasic            | to test the function with normal inputs        | [[1,2,3], [10, 20, 30]]      | 0      | 6                        | ECT         |
+| testCalculateRowTotalLastRow       | to the the function with last column           | [[1,2,3], [10, 20, 30]]      | 1      | 60                        | Boundary UB |
+| testCalculateRowTotalWithMissingValue | to test the function with missing values       | [[1, null, 3], [10, 20, 30]] | 0      | 20                        | ECT         |
+| testCalculateRowTotalOneRow           | to test the function with a data of one row    | [[0, 1, 2]]                  | 0      | 3                         | ECT         |
+| testCalculateRowTotalOneRow        | to test the function with a data of one column | [[10] [20]]                  | 0      | 10                        | ECT         |
+| testCalculateRowTotalWithNullInput    | to test the function with null input           | null                         | 1      | InvalidParameterException | ECT         |
+
