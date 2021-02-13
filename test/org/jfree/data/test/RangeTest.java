@@ -45,13 +45,33 @@ public class RangeTest {
     }
 
     @Test
-    public void testContainsHasValue() {
+    public void testContainsValueInRange() {
+        assertTrue(exampleRange.contains(0.5));
+    }
+
+    @Test
+    public void testContainsValueZero() {
+        assertTrue(exampleRange.contains(0.5));
+    }
+
+    @Test
+    public void testContainsValueEqualToUpperRange() {
         assertTrue(exampleRange.contains(1.0));
     }
 
     @Test
-    public void testContainsHasNotValue() {
+    public void testContainsValueMoreThanUpperRange() {
         assertFalse(exampleRange.contains(5.0));
+    }
+
+    @Test
+    public void testContainsValueEqualToLowerRange() {
+        assertTrue(exampleRange.contains(-1.0));
+    }
+
+    @Test
+    public void testContainsValueLessThanLowerRange() {
+        assertFalse(exampleRange.contains(-5.0));
     }
 
     @Test
