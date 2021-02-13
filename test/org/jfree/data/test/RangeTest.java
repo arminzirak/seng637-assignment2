@@ -218,6 +218,12 @@ public class RangeTest {
         assertFalse(range1.equals(null));
     }
 
+    @Test
+    public void testEqualsWithNonRangeInput() {
+        Range range1= new Range(-1,2);
+        assertFalse(range1.equals(new Object()));
+    }
+
 
 
     @Test
