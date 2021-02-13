@@ -28,28 +28,32 @@ public class RangeTest {
 
 
     @Test
-    public void getLowerBound() {
+    public void testGetLowerBound() {
         assertEquals(-1.0,exampleRange.getLowerBound(),0.0000001);
     }
 
     @Test
-    public void getUpperBound() {
+    public void testGetUpperBound() {
         assertEquals(1.0,exampleRange.getUpperBound(),0.0000001);
     }
 
     @Test
-    public void LengthValueShouldBeTwo() {
+    public void testGetLength() {
         assertEquals(2.0,exampleRange.getLength(),0.001);
     }
 
     @Test
-    public void Contians() {
+    public void testContainsHasValue() {
         assertTrue(exampleRange.contains(1.0));
+    }
+
+    @Test
+    public void testContainsHasNotValue() {
         assertFalse(exampleRange.contains(5.0));
     }
 
     @Test
-    public void testOverlappedValuesintersects() {
+    public void testIntersectCombinations() {
         assertTrue(exampleRange.intersects(0.0,0.50));
         assertTrue(exampleRange.intersects(0.0,4.0));
         assertTrue(exampleRange.intersects(-1.0,0.0));
@@ -64,30 +68,33 @@ public class RangeTest {
     }
 
     @Test
-    public void testPositiveValuesconstrain() {
+    public void testConstrainAboveUpper() {
         assertEquals(1,exampleRange.constrain(1.2),0.001);
-        assertEquals(0.2,exampleRange.constrain(0.2),0.001);
-        assertEquals(1,exampleRange.constrain(5.0),0.001);
-        assertEquals(1,exampleRange.constrain(Double.POSITIVE_INFINITY),0.001);
-
     }
 
     @Test
-    public void testNegativeValuesconstrain() {
-        assertEquals(-1,exampleRange.constrain(-5.0),0.001);
-        assertEquals(-1,exampleRange.constrain(-1.0),0.001);
-        assertEquals(-1,exampleRange.constrain(Double.NEGATIVE_INFINITY),0.001);
+    public void testConstrainUpper() {
+        assertEquals(1,exampleRange.constrain(1),0.001);
     }
 
     @Test
-    public void testNormalValuesConstrain() {
-        assertEquals(0.5,exampleRange.constrain(0.5),0);
-        assertEquals(-0.5,exampleRange.constrain(-0.5),0);
+    public void testConstrainInRange() {
+        assertEquals(0.5,exampleRange.constrain(0.5),0.001);
     }
 
     @Test
-    public void testZeroValuesConstrain() {
+    public void testConstrainZeroValuesConstrain() {
         assertEquals(0,exampleRange.constrain(0),0);
+    }
+
+    @Test
+    public void testConstrainLower() {
+        assertEquals(-1,exampleRange.constrain(-1),0.001);
+    }
+
+    @Test
+    public void testConstrainBelowLower() {
+        assertEquals(-1,exampleRange.constrain(-5.0),0.001);
     }
 
 
