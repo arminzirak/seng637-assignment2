@@ -10,6 +10,8 @@ import static org.junit.Assert.*;
 import org.jfree.data.Range;
 import org.junit.*;
 
+import java.security.InvalidParameterException;
+
 public class RangeTest {
     private Range exampleRange;
     @BeforeClass public static void setUpBeforeClass()
@@ -150,26 +152,38 @@ public class RangeTest {
     }
 
     @Test
-    public void shift() {
+    public void testShiftPositive() {
         Range shifted= Range.shift(exampleRange, 2.0);
         assertEquals(1.0,shifted.getLowerBound(), 0.001);
         assertEquals(3.0,shifted.getUpperBound(),0.001);
-        Range shift1=new Range(-10.0,10.0);
-        Range shift2=Range.shift(shift1,10.0, true);
-        assertEquals(0.0,shift1.getLowerBound(), 0.001);
-        assertEquals(20.0,shift2.getUpperBound(),0.001);
-        Range shift3=new Range(-10.0,0.0);
-        Range shift4=Range.shift(shift3,-10.0, true);
-        assertEquals(-20.0,shift3.getLowerBound(), 0.001);
-        assertEquals(-10.0,shift4.getUpperBound(),0.001);
-
-
-
-
     }
 
     @Test
-    public void NONallowZeroCrossingshift() {
+    public void testShiftZero() {
+        Range shifted= Range.shift(exampleRange, 0.0);
+        assertEquals(-1.0,shifted.getLowerBound(), 0.001);
+        assertEquals(1.0,shifted.getUpperBound(),0.001);
+    }
+
+    @Test
+    public void testShiftNegative() {
+        Range shifted= Range.shift(exampleRange, -2.0);
+        assertEquals(-3.0,shifted.getLowerBound(), 0.001);
+        assertEquals(-1.0,shifted.getUpperBound(),0.001);
+    }
+
+    @Test(expected = InvalidParameterException.class)
+    public void testShiftNull() {
+        Range.shift(null, 0.0);
+    }
+
+    @Test(expected = InvalidParameterException.class)
+    public void testShiftNullAndZero() {
+        Range.shift(null, 0.0);
+    }
+
+    @Test
+    public void testShiftNonAllowZeroCrossingShift() {
         Range shifted= Range.shift(exampleRange, 2, false);
         assertEquals(0.0,shifted.getLowerBound(), 0.001);
         assertEquals(3.0,shifted.getUpperBound(),0.001);
