@@ -30,9 +30,23 @@ public class RangeTest {
 
 
     @Test
-    public void testGetLowerBound() {
-        assertEquals(-1.0,exampleRange.getLowerBound(),0.0000001);
+    public void testGetLowerBoundWithPositiveLower() {
+        Range range = new Range(1, 5);
+        assertEquals(1.0,range.getLowerBound(),0.0000001);
     }
+
+    @Test
+    public void testGetLowerBoundWithNegativeLower() {
+        Range range = new Range(-1, 5);
+        assertEquals(-1.0,range.getLowerBound(),0.0000001);
+    }
+
+    @Test
+    public void testGetLowerBoundWithZeroLower() {
+        Range range = new Range(0, 5);
+        assertEquals(0,range.getLowerBound(),0.0000001);
+    }
+
 
     @Test
     public void testGetUpperBound() {
