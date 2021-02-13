@@ -185,17 +185,40 @@ public class RangeTest {
     }
 
     @Test
-    public void equals() {
-        Range equals1= new Range(0,1);
-        Range equals2= new Range(0,1);
-        equals1=new Range(-2.0,1.0);
-        equals2=new Range(0.0,1.0);
-        assertFalse(equals1.equals(equals2));
-        equals1=new Range(0.0,1.0);
-        equals2=new Range(0.0,2.0);
-        assertFalse(equals1.equals(equals2));
-        assertFalse(equals1.equals(-3.0));
+    public void testEqualsWithSameLowerDifferentUpper() {
+        Range range1= new Range(0,1);
+        Range range2= new Range(0,2);
+        assertFalse(range1.equals(range2));
     }
+
+    @Test
+    public void testEqualsWithSameLowerSameUpper() {
+        Range range1= new Range(0,1);
+        Range range2= new Range(0,1);
+        assertTrue(range1.equals(range2));
+    }
+
+    @Test
+    public void testEqualsWithDifferentLowerSameUpper() {
+        Range range1= new Range(-1,1);
+        Range range2= new Range(0,1);
+        assertFalse(range1.equals(range2));
+    }
+
+    @Test
+    public void testEqualsWithDifferentLowerDifferentUpper() {
+        Range range1= new Range(-1,2);
+        Range range2= new Range(0,1);
+        assertFalse(range1.equals(range2));
+    }
+
+    @Test
+    public void testEqualsWithNullInput() {
+        Range range1= new Range(-1,2);
+        assertFalse(range1.equals(null));
+    }
+
+
 
     @Test
     public void testPositiveValueshashCode() {
