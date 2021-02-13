@@ -1,3 +1,7 @@
+
+
+
+
 # Test plan
 
 ## class - DataUtilities 
@@ -28,44 +32,38 @@ Constructs an array of Number objects from an array of double primitives.
 
 
 
-### Method 2: calculateColumnTotal 
+### Method 3: calculateColumnTotal 
 
-public static double calculateColumnTotal(Values2D data,
-                                          int column)
+public static double calculateColumnTotal(Values2D data, int column)
 Returns the sum of the values in one column of the supplied data table. With invalid input, a total of zero will be returned.
 
-
-#### Input 
-
--data
-    the table of values 
-    null not permitted
--column 
-    Zero based column index
-
-
-#### Output
-
--An array of Number objects.
-
 ### Partitions
- 
- ##### values2D
 
--Expected 
-    -values2D object with valid values
-    -values2D object with values
--Unexpected
-    -values2D object with unvalid objects
-    -null
+#### data
+     the table of values (null not permitted)
+- expected:
+    - array with width more than one and height more than one
+    - array with width equals to one and height more than one
+    - array with width more than one and height equals to one
+    - array with width equals to one and height equals to one
+- unexpected
+    - null
 
-##### Column
+#### column
+     the column index
+- expected:
+    - int in range of [0, (the number of columns - 1)]
+- unexpected
+    - less than zero
+    - more than the number of columns
 
--Expected
-    Any values within the table size
-    Zero
--Unexpected
-    values larger than table size
-    negetive values 
-    String 
 
+| Test Case                                | Description                                    | Data                         | Column | Expected                  | Test Type   |
+|------------------------------------------|------------------------------------------------|------------------------------|--------|---------------------------|-------------|
+| testCalculateColumnTotalBasic            | to test the function with normal inputs        | [[1,2,3], [10, 20, 30]]      | 1      | 21                        | ECT         |
+| testCalculateColumnTotalLastColumn       | to the the function with last column           | [[1,2,3], [10, 20, 30]]      | 2      | 33                        | Boundary UB |
+| testCalculateColumnTotalWithColumnZero   | to test the function with first column         | [[1,2,3], [10, 20, 30]]      | 0      | 11                        | Boundary LB |
+| testCalculateColumnTotalWithMissingValue | to test the function with missing values       | [[1, null, 3], [10, 20, 30]] | 1      | 20                        | ECT         |
+| testCalculateColumnTotalOneRow           | to test the function with a data of one row    | [[0, 1, 2]]                  | 1      | 3                         | ECT         |
+| testCalculateColumnTotalOneColumn        | to test the function with a data of one column | [[10] [20]]                  | 0      | 10                        | ECT         |
+| testCalculateColumnTotalWithNullInput    | to test the function with null input           | null                         | 1      | InvalidParameterException | ECT         |

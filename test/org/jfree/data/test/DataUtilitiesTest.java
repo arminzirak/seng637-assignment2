@@ -150,26 +150,6 @@ public class DataUtilitiesTest {
 
     }
 
-    @Test(expected = IllegalArgumentException.class) //testing the null input
-    public void testCreateNumberArrayNullInput(){
-        DataUtilities.createNumberArray(null);
-    }
-
-
-    @Test // testing the equivalence of the input and output values
-    public void testCreateNumberArray() {
-        double[] list = new double[10];
-        for (int i = 0; i < 10; i ++){
-            list[i] = i  * 1.1;
-        }
-        Number[] generated_list = DataUtilities.createNumberArray(list);
-        assertEquals(list.length, 10);
-        assertEquals(generated_list.length, 10);
-        for (int i = 0; i < 10; i++){
-            assertEquals(list[i], generated_list[i]);
-        }
-    }
-
     @Test
     public void testCalculateRowBasic() {
         double result = DataUtilities.calculateRowTotal(values2D, 0);
@@ -208,43 +188,43 @@ public class DataUtilitiesTest {
 
 //
     @Test
-    public void testCalculateColumnBasic() {
-        double result = DataUtilities.calculateColumnTotal(values2D, 0);
-        assertEquals( 10, result, 0);
-    }
-
-    @Test
-    public void testCalculateColumnLastColumn() {
-        double result = DataUtilities.calculateColumnTotal(values2D, 2);
-        assertEquals( 32, result, 0);
-    }
-
-    @Test
-    public void testCalculateColumnNonBoundaryColumn() {
+    public void testCalculateColumnTotalBasic() {
         double result = DataUtilities.calculateColumnTotal(values2D, 1);
         assertEquals( 21, result, 0);
     }
 
     @Test
-    public void testCalculateColumnWithMissingValue() {
+    public void testCalculateColumnTotalLastColumn() {
+        double result = DataUtilities.calculateColumnTotal(values2D, 2);
+        assertEquals( 32, result, 0);
+    }
+
+    @Test
+    public void testCalculateColumnTotalWithColumnZero() {
+        double result = DataUtilities.calculateColumnTotal(values2D, 0);
+        assertEquals( 10, result, 0);
+    }
+
+    @Test
+    public void testCalculateColumnTotalWithMissingValue() {
         double result = DataUtilities.calculateColumnTotal(values2D_with_missing, 1);
         assertEquals( 20, result, 0);
     }
 
     @Test
-    public void testCalculateColumnOneRow() {
+    public void testCalculateColumnTotalOneRow() {
         double result = DataUtilities.calculateColumnTotal(values2D_one_row, 1);
         assertEquals( 1, result, 0);
     }
 
     @Test
-    public void testCalculateColumnOneColumn() {
+    public void testCalculateColumnTotalOneColumn() {
         double result = DataUtilities.calculateColumnTotal(values2D_one_column, 0);
         assertEquals( 30, result, 0);
     }
 
     @Test(expected = InvalidParameterException.class)
-    public void testCalculateColumnWithNullInput() {
+    public void testCalculateColumnTotalWithNullInput() {
         DataUtilities.calculateColumnTotal(null, 1);
     }
 //
@@ -271,6 +251,25 @@ public class DataUtilitiesTest {
         DataUtilities.getCumulativePercentages(null);
     }
 
+    @Test
+    public void testCreateNumberArrayNullInput(){
+        DataUtilities.createNumberArray(null);
+    }
+
+
+    @Test // testing the equivalence of the input and output values
+    public void testCreateNumberArrayWithSizeMoreThanOne() {
+        double[] list = new double[10];
+        for (int i = 0; i < 10; i ++){
+            list[i] = i  * 1.1;
+        }
+        Number[] generated_list = DataUtilities.createNumberArray(list);
+        assertEquals(list.length, 10);
+        assertEquals(generated_list.length, 10);
+        for (int i = 0; i < 10; i++){
+            assertEquals(list[i], generated_list[i]);
+        }
+    }
 
     @Test // testing the array with length of one
     public void testCreateNumberArrayWithSizeOne() {
