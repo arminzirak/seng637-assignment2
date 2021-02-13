@@ -153,3 +153,32 @@ Returns the value within the range that is closest to the specified value.
 | testConstrainZeroValuesConstrain | input = 0, input > lower, input < upper  | 0    | 0        | ECT         |
 | testConstrainLower               | input = lower                            | -1   | -1       | Boundary-LB |
 | testConstrainBelowLower          | input < lower                            | -5   | -1       | ECT         |
+
+
+### Method 2: equals
+
+public boolean equals(java.lang.Object obj)
+Tests this object for equality with an arbitrary object.
+
+### Partitions
+
+#### data
+     Any object to test against (null permitted).
+- expected:
+    - Equal range
+    - Equal lower
+    - Equal upper
+    - Equal lower and upper
+    - Non equal range
+    - Null
+    - Other objects 
+
+
+| Test Case                                  | Description                                              | Expected | Test Type |
+|--------------------------------------------|----------------------------------------------------------|----------|-----------|
+| testEqualsWithSameLowerDifferentUpper      | range1.upper != range2.upper, range1.lower=range2.lower  | false    | ECT       |
+| testEqualsWithSameLowerSameUpper           | range1.upper = range2.upper, range1.lower=range2.lower   | true     | ECT       |
+| testEqualsWithDifferentLowerSameUpper      | range1.upper = range2.upper, range1.lower!=range2.lower  | false    | ECT       |
+| testEqualsWithDifferentLowerDifferentUpper | range1.upper != range2.upper, range1.lower!=range2.lower | false    | ECT       |
+| testEqualsWithNullInput                    | null input                                               | false    | ECT       |
+| testEqualsWithNonRangeInput                | other object input                                       | false    | ECT       |
