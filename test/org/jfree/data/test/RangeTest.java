@@ -51,7 +51,7 @@ public class RangeTest {
 
     @Test
     public void testContainsValueZero() {
-        assertTrue(exampleRange.contains(0.5));
+        assertTrue(exampleRange.contains(0));
     }
 
     @Test
