@@ -4,17 +4,26 @@
 
 ### Method 1: createNumberArray
 
+public static java.lang.Number[] createNumberArray(double[] data)
 Constructs an array of Number objects from an array of double primitives.
 
-#### Input 
-
--Array of double primitives.
-
-#### Output
-
--An array of Number objects.
-
 ### Partitions
+
+data:
+    - An array of double primitives
+- expected:
+    - array of size more than one
+    - array of size one
+    - array of size zero
+- unexpected 
+    - null
+    
+| Test Case                                | Description                              | data      | Expected                 | Test Type    |
+|------------------------------------------|------------------------------------------|-----------|--------------------------|--------------|
+| testCreateNumberArrayNullInput           | to test the null input as an input       | null      | IllegalArgumentException | ECT          |
+| testCreateNumberArrayWithSizeMoreThanOne | to test array with size of more than one | [1 2 ...] | number array([1 2 ...])  | ECT          |
+| testCreateNumberArrayWithSizeOne         | to test array with size one              | [5]       | number array([5])        | Boundary ALB |
+| testCreateNumberArrayWithSizeZero        | to test array with size zero             | []        | number array([])         | Boundary LB  |
 
 
 
