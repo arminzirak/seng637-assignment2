@@ -22,29 +22,29 @@ public class RangeTest {
     public void setUp() throws Exception { exampleRange = new Range(-1.0, 1.0);
     }
 
-    @Test
+    @Test //testing the central value to be zero
     public void centralValueShouldBeZero() {
         assertEquals("The central value of -1 and 1 should be 0",
                 0, exampleRange.getCentralValue(), .000000001d);
     }
 
 
-    @Test
+    @Test // testing the getter with positive lower  band
     public void testGetLowerBoundWithPositiveLower() {
         Range range = new Range(1, 5);
-        assertEquals(1.0,range.getLowerBound(),0.0000001);
+        assertEquals("the lower range should be 1", 1.0,range.getLowerBound(),0.0000001);
     }
 
-    @Test
+    @Test// testing the getter with negative lower band
     public void testGetLowerBoundWithNegativeLower() {
         Range range = new Range(-1, 5);
-        assertEquals(-1.0,range.getLowerBound(),0.0000001);
+        assertEquals("the lower range should be -1",-1.0,range.getLowerBound(),0.0000001);
     }
 
-    @Test
+    @Test// testing the getter with zero lower band
     public void testGetLowerBoundWithZeroLower() {
         Range range = new Range(0, 5);
-        assertEquals(0,range.getLowerBound(),0.0000001);
+        assertEquals("the lower range should be 0",0,range.getLowerBound(),0.0000001);
     }
 
 
@@ -58,7 +58,7 @@ public class RangeTest {
         assertEquals(2.0,exampleRange.getLength(),0.001);
     }
 
-    @Test
+    @Test // testing the contains with values in range
     public void testContainsValueInRange() {
         assertTrue(exampleRange.contains(0.5));
     }
