@@ -130,3 +130,26 @@ Returns the sum of the values in one row of the supplied data table. With invali
 | testCalculateRowTotalOneRow        | to test the function with a data of one column | [[10] [20]]                  | 0      | 10                        | ECT         |
 | testCalculateRowTotalWithNullInput    | to test the function with null input           | null                         | 1      | InvalidParameterException | ECT         |
 
+
+## class - Range 
+
+### Method 1: constrain
+
+public double constrain(double value)
+Returns the value within the range that is closest to the specified value.
+
+### Partitions
+
+#### data
+     A double primitives
+- expected:
+    - the whole range from upper than to lower than boundary
+
+| Test Case                        | Description                              | data | Expected | Test Type   |
+|----------------------------------|------------------------------------------|------|----------|-------------|
+| testConstrainAboveUpper          | input > upper (range = -1 : 1)           | 1.2  | 1        | ECD         |
+| testConstrainUpper               | input = upper                            | 1    | 1        | Boundary-UB |
+| testConstrainInRange             | input > lower, input < upper             | 0.5  | 0.5      | ECT         |
+| testConstrainZeroValuesConstrain | input = 0, input > lower, input < upper  | 0    | 0        | ECT         |
+| testConstrainLower               | input = lower                            | -1   | -1       | Boundary-LB |
+| testConstrainBelowLower          | input < lower                            | -5   | -1       | ECT         |
