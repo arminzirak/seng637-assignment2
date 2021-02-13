@@ -153,3 +153,25 @@ Returns the value within the range that is closest to the specified value.
 | testConstrainZeroValuesConstrain | input = 0, input > lower, input < upper  | 0    | 0        | ECT         |
 | testConstrainLower               | input = lower                            | -1   | -1       | Boundary-LB |
 | testConstrainBelowLower          | input < lower                            | -5   | -1       | ECT         |
+
+
+### Method 1: constrain
+
+public double constrain(double value)
+Returns the value within the range that is closest to the specified value.
+
+### Partitions
+
+#### data
+     A double primitives
+- expected:
+    - the whole range from upper than to lower than boundary
+
+| Test Case                        | Description                              | data | Expected | Test Type   |
+|----------------------------------|------------------------------------------|------|----------|-------------|
+| testConstrainAboveUpper          | input > upper (range = -1 : 1)           | 1.2  | 1        | ECT         |
+| testConstrainUpper               | input = upper                            | 1    | 1        | Boundary-UB |
+| testConstrainInRange             | input > lower, input < upper             | 0.5  | 0.5      | ECT         |
+| testConstrainZeroValuesConstrain | input = 0, input > lower, input < upper  | 0    | 0        | ECT         |
+| testConstrainLower               | input = lower                            | -1   | -1       | Boundary-LB |
+| testConstrainBelowLower          | input < lower                            | -5   | -1       | ECT         |
