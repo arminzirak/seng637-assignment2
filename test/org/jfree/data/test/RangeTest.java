@@ -174,7 +174,7 @@ public class RangeTest {
 
     @Test(expected = InvalidParameterException.class)
     public void testShiftNull() {
-        Range.shift(null, 0.0);
+        Range.shift(null, 2.0);
     }
 
     @Test(expected = InvalidParameterException.class)

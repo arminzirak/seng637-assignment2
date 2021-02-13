@@ -182,3 +182,34 @@ Tests this object for equality with an arbitrary object.
 | testEqualsWithDifferentLowerDifferentUpper | range1.upper != range2.upper, range1.lower!=range2.lower | false    | ECT       |
 | testEqualsWithNullInput                    | null input                                               | false    | ECT       |
 | testEqualsWithNonRangeInput                | other object input                                       | false    | ECT       |
+
+
+
+### Method 3: shifted
+
+public static Range shift(Range base,
+                          double delta,
+                          boolean allowZeroCrossing)
+Returns a range the size of the input range, which has been moved positively (to the right) by the delta value. If allowZeroCrossing is false, any bound which crosses the zero mark after shifting (either from negative to positive, or positive to negative), will become zero.
+
+### Partitions
+
+#### data
+     base - the base range (null not permitted).
+     delta - the shift amount.
+
+- expected:
+    - Any positive double 
+    - Any negetive double 
+    - zero
+- unexpected:
+    - null
+
+
+| Test Case            | Description               | range  | delta | Expected                    | Test Type |
+|----------------------|---------------------------|--------|-------|-----------------------------|-----------|
+| testShiftPositive    | positive delta            | [-1:1] | 2     | [1:3]                       | ECT       |
+| testShiftZero        | zero delta                | [-1:1] | 0     | [1:-1]                      | ECT       |
+| testShiftNegative    | negative delta            | [-1:1] | -2    | [-3:-1]                     | ECT       |
+| testShiftNull        | null range                | null   | 2     | invalid parameter exception | ECT       |
+| testShiftNullAndZero | null range and zero delta | null   | 0     | invalid parameter exception | WCT       |
