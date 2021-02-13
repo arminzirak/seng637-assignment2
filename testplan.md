@@ -131,6 +131,33 @@ Returns the sum of the values in one row of the supplied data table. With invali
 | testCalculateRowTotalWithNullInput    | to test the function with null input           | null                         | 1      | InvalidParameterException | ECT         |
 
 
+
+### Method 5: getCumulativePercentages
+
+public static KeyedValues getCumulativePercentages(KeyedValues data)
+Returns a KeyedValues instance that contains the cumulative percentage values for the data in another KeyedValues instance. The cumulative percentage is each value's cumulative sum's portion of the sum of all the values.
+
+### Partitions
+
+#### data
+
+     The keyedValues object
+- expected:
+  - a list of key values
+  - a list of index values from 0 to the length of keys -1 
+- unexpected
+  - null
+
+
+
+| Test Case                                | Description            | keyedValues                 | Expected                  | Test Type   |
+|------------------------------------------|------------------------|-----------------------------|---------------------------|-------------|
+| testGetCumulativePercentagesNormal       | A key in range of keys | [(0:1),(1:5),(2:10),(3:15)] | 6.0 / 31.0                | ECT         |
+| testGetCumulativePercentagesLastElement  | last key in the keys   | [(0:1),(1:5),(2:10),(3:15)] | 1.0                       | boundary UB |
+| testGetCumulativePercentagesFirstElement | first key in the list  | [(0:1),(1:5),(2:10),(3:15)] | 1.0 / 31.0                | boundary LB |
+| testGetCumulativePercentagesNull         | null input             | [(0:1),(1:5),(2:10),(3:15)] | InvalidParameterException | ECT         |
+
+
 ## class - Range 
 
 ### Method 1: constrain
@@ -213,3 +240,52 @@ Returns a range the size of the input range, which has been moved positively (to
 | testShiftNegative    | negative delta            | [-1:1] | -2    | [-3:-1]                     | ECT       |
 | testShiftNull        | null range                | null   | 2     | invalid parameter exception | ECT       |
 | testShiftNullAndZero | null range and zero delta | null   | 0     | invalid parameter exception | WCT       |
+
+
+### Method 4: contains
+
+public boolean contains(double value)
+Returns true if the specified value is within the range and false otherwise. (either from negative to positive, or positive to negative), will become zero.
+
+### Partitions
+
+#### data
+     A double primitive 
+
+- expected:
+    - Any in range double 
+    - Any out of range double 
+    - Any double on the ranges
+    - zero
+
+
+| Test Case                           | Description    | range  | input | Expected | Test Type    |
+|-------------------------------------|----------------|--------|-------|----------|--------------|
+| testContainsValueInRange            | input in range | [-1:1] | 0.5   | true     | ECT          |
+| testContainsValueZero               | zero input     | [-1:1] | 0     | true     | ECT          |
+| testContainsValueEqualToUpperRange  | input = upper  | [-1:1] | 1     | true     | boundary UB  |
+| testContainsValueMoreThanUpperRange | input > upper  | [-1:1] | 5     | false    | boundary AUB |
+| testContainsValueEqualToLowerRange  | input = lower  | [-1:1] | -1    | true     | boundary LB  |
+| testContainsValueLessThanLowerRange | input < lower  | [-1:1] | -5    | false    | boundary BLB |
+
+### Method 5: getLowerBound
+
+public double getLowerBound()
+Returns the lower bound for the range.
+
+### Partitions
+
+#### data
+     A range object
+
+- expected:
+    - A range with positive lower 
+    - A range with negative lower 
+    - A range with zero lower 
+
+
+| Test Case                          | Description               | range  | Expected | Test Type |
+|------------------------------------|---------------------------|--------|----------|-----------|
+| testGetLowerBoundWithPositiveLower | Range with positive lower | [1:5]  | 1        | ECT       |
+| testGetLowerBoundWithNegativeLower | Range with negative lower | [-1:5] | -1       | ECT       |
+| testGetLowerBoundWithZeroLower     | Range with zero lower     | [0:5]  | 0        | ECT       |
