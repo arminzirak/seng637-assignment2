@@ -150,108 +150,108 @@ public class DataUtilitiesTest {
 
     }
 
-    @Test
+    @Test // testing the calculateRowTotal with random input
     public void testCalculateRowBasic() {
         double result = DataUtilities.calculateRowTotal(values2D, 0);
-        assertEquals( 3, result, 0);
+        assertEquals( "the number of rows should be 3",3, result, 0);
     }
 
-    @Test
+    @Test // testing the calculateRowTotal with last row
     public void testCalculateRowLastRow() {
         double result = DataUtilities.calculateRowTotal(values2D, 1);
-        assertEquals( 60, result, 0);
+        assertEquals( "the number of rows should be 60",60, result, 0);
     }
 
-    @Test
+    @Test // testing the calculateRowTotal with missing values
     public void testCalculateRowWithMissingValue() {
         double result = DataUtilities.calculateRowTotal(values2D_with_missing, 0);
-        assertEquals( 2, result, 0);
+        assertEquals( "the number of rows should be 2",2, result, 0);
     }
 
-    @Test
+    @Test // testing the calculateRowTotal with one row
     public void testCalculateRowOneRow() {
         double result = DataUtilities.calculateRowTotal(values2D_one_row, 0);
-        assertEquals( 3, result, 0);
+        assertEquals( "the number of rows should be 3",3, result, 0);
     }
 
-    @Test
+    @Test// testing calculateRowTotal with one column
     public void testCalculateRowOneColumn() {
         double result = DataUtilities.calculateRowTotal(values2D_one_column, 0);
-        assertEquals( 30, result, 0);
+        assertEquals( "the number of rows should be 30",30, result, 0);
     }
 
-    @Test(expected = InvalidParameterException.class)
+    @Test(expected = InvalidParameterException.class) // testing with null input
     public void testCalculateRowWithNullInput() {
         DataUtilities.calculateRowTotal(null, 1);
     }
 
 
 //
-    @Test
+    @Test // testing the calculateColumnTotal with one random input
     public void testCalculateColumnTotalBasic() {
         double result = DataUtilities.calculateColumnTotal(values2D, 1);
-        assertEquals( 21, result, 0);
+        assertEquals( "the number of columns should be 21",21, result, 0);
     }
 
-    @Test
+    @Test // testing the calculateColumnTotal with last column
     public void testCalculateColumnTotalLastColumn() {
         double result = DataUtilities.calculateColumnTotal(values2D, 2);
-        assertEquals( 32, result, 0);
+        assertEquals( "the number of columns should be 32",32, result, 0);
     }
 
-    @Test
+    @Test // testing calculateColumnTotal with zero column
     public void testCalculateColumnTotalWithColumnZero() {
         double result = DataUtilities.calculateColumnTotal(values2D, 0);
-        assertEquals( 10, result, 0);
+        assertEquals( "the number of columns should be 10", 10, result, 0);
     }
 
-    @Test
+    @Test // testing the calculateColumnTotal with missing values
     public void testCalculateColumnTotalWithMissingValue() {
         double result = DataUtilities.calculateColumnTotal(values2D_with_missing, 1);
-        assertEquals( 20, result, 0);
+        assertEquals( "the total number of columns should be 20", 20, result, 0);
     }
 
-    @Test
+    @Test // testing the total column values with one row
     public void testCalculateColumnTotalOneRow() {
         double result = DataUtilities.calculateColumnTotal(values2D_one_row, 1);
-        assertEquals( 1, result, 0);
+        assertEquals("the number of rows should be 1", 1, result, 0);
     }
 
-    @Test
+    @Test // testing the total column values with one column
     public void testCalculateColumnTotalOneColumn() {
         double result = DataUtilities.calculateColumnTotal(values2D_one_column, 0);
-        assertEquals( 30, result, 0);
+        assertEquals( "the number of columns should be 30",30, result, 0);
     }
 
-    @Test(expected = InvalidParameterException.class)
+    @Test(expected = InvalidParameterException.class) // testing with null input
     public void testCalculateColumnTotalWithNullInput() {
         DataUtilities.calculateColumnTotal(null, 1);
     }
 //
-    @Test
+    @Test // testing a random key percentage in the key value
     public void testGetCumulativePercentagesNormal() {
         KeyedValues result = DataUtilities.getCumulativePercentages(keyedValues);
         assertEquals(6.0/31.0, result.getValue(1));
     }
 
-    @Test
+    @Test // testing the percentage of last value in the key value
     public void testGetCumulativePercentagesLastElement() {
         KeyedValues result = DataUtilities.getCumulativePercentages(keyedValues);
         assertEquals(1.0, result.getValue(3));
     }
 
-    @Test
+    @Test // testing the first key value percentage
     public void testGetCumulativePercentagesFirstElement() {
         KeyedValues result = DataUtilities.getCumulativePercentages(keyedValues);
         assertEquals(1.0/31.0, result.getValue(0));
     }
 
-    @Test(expected = InvalidParameterException.class)
+    @Test(expected = InvalidParameterException.class) // testing with the null input
     public void testGetCumulativePercentagesNull() {
         DataUtilities.getCumulativePercentages(null);
     }
 
-    @Test
+    @Test // testing with the null input
     public void testCreateNumberArrayNullInput(){
         DataUtilities.createNumberArray(null);
     }
@@ -264,10 +264,10 @@ public class DataUtilitiesTest {
             list[i] = i  * 1.1;
         }
         Number[] generated_list = DataUtilities.createNumberArray(list);
-        assertEquals(list.length, 10);
-        assertEquals(generated_list.length, 10);
+        assertEquals("the input list length should be 10",list.length, 10);
+        assertEquals("the generated number array length should be 10",generated_list.length, 10);
         for (int i = 0; i < 10; i++){
-            assertEquals(list[i], generated_list[i]);
+            assertEquals("all the values in input and generated list should be equal",list[i], generated_list[i]);
         }
     }
 
@@ -276,15 +276,15 @@ public class DataUtilitiesTest {
         double[] list = new double[1];
         list[0] = 5;
         Number[] generated_list = DataUtilities.createNumberArray(list);
-        assertEquals(generated_list.length, 1);
-        assertEquals(5, generated_list[0]);
+        assertEquals("the generated number array length should be 1 ",generated_list.length, 1);
+        assertEquals("the generated number array first value should be 5",5, generated_list[0]);
     }
 
     @Test // testing the array with length of zero
     public void testCreateNumberArrayWithSizeZero() {
         double[] list = new double[0];
         Number[] generated_list = DataUtilities.createNumberArray(list);
-        assertEquals(0, generated_list.length);
+        assertEquals("the length of the generated number array should be 0",0, generated_list.length);
     }
 
     @Test(expected = IllegalArgumentException.class) //testing the null input
@@ -302,16 +302,16 @@ public class DataUtilitiesTest {
             }
         }
         Number[][] generated_list = DataUtilities.createNumberArray2D(list);
-        assertEquals(list.length, 10);
-        assertEquals(generated_list.length, 10);
+        assertEquals("the length of the input list row should be 10",list.length, 10);
+        assertEquals("the length of the generated list row should be 10",generated_list.length, 10);
         for (int i = 0; i < 10; i++){
             for(int j = 0 ; j < 10; j++){
-                assertEquals(list[i][j], generated_list[i][j]);
+                assertEquals("all the values in input and generated list should be equal",list[i][j], generated_list[i][j]);
             }
         }
     }
 
-    @Test // testing the array with One Row
+    @Test // testing the array with One Row and 10 columns
     public void testCreateNumberArray2dWithOneRow() {
         double[][] list = new double[1][10];
         for(int i=0 ; i<10 ;i++)
@@ -319,15 +319,15 @@ public class DataUtilitiesTest {
             list[0][i] = i  * 1.1;
         }
         Number[][] generated_list = DataUtilities.createNumberArray2D(list);
-        assertEquals(generated_list.length, 1);
-        assertEquals(generated_list[0].length, 10);
+        assertEquals("the length of the generated list row should be 1",generated_list.length, 1);
+        assertEquals("the length of the generated list column should be 10",generated_list[0].length, 10);
         for(int i=0 ; i<10 ;i++)
         {
-            assertEquals(list[0][i], generated_list[0][i]);
+            assertEquals("all the values in input and generated list should be equal",list[0][i], generated_list[0][i]);
         }
     }
 
-    @Test // testing the array with One Column
+    @Test // testing the array with One Column and 10 rows
     public void testCreateNumberArray2dWithOneColumn() {
         double[][] list = new double[10][1];
         for(int i=0 ; i<10 ;i++)
@@ -335,47 +335,30 @@ public class DataUtilitiesTest {
             list[i][0] = i  * 1.1;
         }
         Number[][] generated_list = DataUtilities.createNumberArray2D(list);
-        assertEquals(generated_list.length, 10);
-        assertEquals(generated_list[0].length, 1);
+        assertEquals("the length of the generated list column should be 10",generated_list.length, 10);
+        assertEquals("the length of the generated list should be 1",generated_list[0].length, 1);
         for(int i=0 ; i<10 ;i++)
         {
-            assertEquals(list[i][0], generated_list[i][0]);
+            assertEquals("all the values in input and generated list should be equal",list[i][0], generated_list[i][0]);
         }
     }
 
     @Test // testing the array with Zero Column
     public void testCreateNumberArray2dWithZeroColumn() {
-        double[][] list = new double[10][1];
-        for(int i=0 ; i<10 ;i++)
-        {
-            list[i][0] = i  * 1.1;
-        }
+        double[][] list = new double[10][0];
         Number[][] generated_list = DataUtilities.createNumberArray2D(list);
-        assertEquals(generated_list.length, 10);
-        assertEquals(generated_list[0].length, 1);
-        for(int i=0 ; i<10 ;i++)
-        {
-            assertEquals(list[i][0], generated_list[i][0]);
-        }
+        assertEquals("the length of the generated list column should be 10",generated_list.length, 10);
+        assertEquals("the length of the generated list row should be 0",generated_list[0].length, 0);
     }
 
     @Test // testing the array with size Zero
     public void testCreateNumberArray2dWithSizeZero() {
-        double[][] list = new double[10][10];
-        for (int i = 0; i < 10; i ++){
-            for(int j=0 ; j<10 ;j++)
-            {
-                list[i][j] = i  * 1.1 + j;
-            }
-        }
+        double[][] list = new double[0][0];
+
         Number[][] generated_list = DataUtilities.createNumberArray2D(list);
-        assertEquals(list.length, 10);
-        assertEquals(generated_list.length, 10);
-        for (int i = 0; i < 10; i++){
-            for(int j = 0 ; j < 10; j++){
-                assertEquals(list[i][j], generated_list[i][j]);
-            }
-        }
+        assertEquals("the length of the input list should be 0",list.length, 0);
+        assertEquals("the length of the generated list should be 0",generated_list.length, 0);
+
     }
 
     @After
