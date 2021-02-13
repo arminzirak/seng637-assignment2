@@ -1,6 +1,6 @@
 # Test plan
 
-## class - Datautilities 
+## class - DataUtilities 
 
 ### Method 1: createNumberArray
 
@@ -9,8 +9,8 @@ Constructs an array of Number objects from an array of double primitives.
 
 ### Partitions
 
-data:
-    - An array of double primitives
+#### data
+     An array of double primitives
 - expected:
     - array of size more than one
     - array of size one
